@@ -18,7 +18,7 @@ sex = st.radio("Sex", ["Male", "Female"])
 age = st.slider("Age", 0.42, 80.0, 25.0)
 sibsp = st.number_input("Number of Siblings/Spouses aboard", min_value=0, max_value=8, value=0)
 parch = st.number_input("Number of Parents/Children aboard", min_value=0, max_value=6, value=0)
-fare = st.number_input("Fare Price", min_value=0.0, max_value=600.0, value=32.0)
+fare = st.number_input("Fare Price", min_value=0.0, max_value=600.0, value=32.0,step=1)
 embarked = st.radio("Port of Embarkation", ["S", "Q"]) # Note: 'C' was dropped
 
 # Normalize age and fare using the same scaler used during training
@@ -46,4 +46,5 @@ if st.button("Predict Survival"):
     if prediction[0] == 1:
         st.success("🎉 The passenger **would survive**!")
     else:
+
         st.error("💀 The passenger **would not survive**.")
