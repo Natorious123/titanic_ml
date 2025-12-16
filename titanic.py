@@ -19,7 +19,7 @@ age = st.slider("Age", 0.42, 80.0, 25.0)
 sibsp = st.number_input("Number of Siblings/Spouses aboard", min_value=0, max_value=8, value=0)
 parch = st.number_input("Number of Parents/Children aboard", min_value=0, max_value=6, value=0)
 fare = st.number_input("Fare Price", min_value=0.0, max_value=600.0, value=32.0,step=1.0)
-embarked = st.radio("Port of Embarkation", ["S", "Q"]) # Note: 'C' was dropped
+embarked = st.radio("Port of Embarkation", ["Southampton, England", "Queenstown, Ireland"]) # Note: 'C' was dropped
 
 # Normalize age and fare using the same scaler used during training
 
@@ -34,8 +34,8 @@ norm_fare = (fare - fare_min) / (fare_max - fare_min)
 sex_encoded = 0 if sex == "Male" else 1
 
 # Encode embarked (we dropped 'C', so only 'Q' and 'S' used)
-embarked_Q = 1 if embarked == "Q" else 0
-embarked_S = 1 if embarked == "S" else 0
+embarked_Q = 1 if embarked == "Queenstown, Ireland" else 0
+embarked_S = 1 if embarked == "Southampton, England" else 0
 
 # Prepare the final input (must match training columns order)
 input_data = np.array([[pclass, sex_encoded, norm_age, sibsp, parch, norm_fare, embarked_Q, embarked_S]])
@@ -48,4 +48,5 @@ if st.button("Predict Survival"):
     else:
 
         st.error("💀 The passenger **would not survive**.")
+
 
